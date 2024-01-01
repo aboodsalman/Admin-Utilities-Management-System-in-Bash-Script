@@ -4,8 +4,8 @@ user-friendly interface to execute various functions.
 The system shall prompt a user to enter a passcode, which is hard-coded in the script and shall be hidden
 (password-like). If it is true, A sub-menu called Admin Utilities will appear that contains the following
 items:
-■ Memory Usage
-■ CPU Usage
-■ Disk Usage
-■ Who’s There.
-■ Show Network Information
+* Memory Usage.
+* CPU Usage.
+* Disk Usage.
+* Who’s There.
+* Show Network Information.
