@@ -1,0 +1,20 @@
+#Name: Abdulrahman Salman
+#ID: u1220817
+#The script below is to find the percent of used CPU by using top command and compare it with the threshold value, it will send a notification if the usage is high
+
+current_user=$(whoami)                                                               #the value of the current login user name
+threshold=80
+user_usage=$(top -n 1 -b | grep "%Cpu(s):" | tr -s ' ' | cut -d' ' -f2)              #the user usage percent from CPU
+system_usage=$(top -n 1 -b | grep "%Cpu(s):" | tr -s ' ' | cut -d' ' -f4)            #the system usage precent from the CPU
+total_usage=$(echo "$user_usage + $system_usage" | bc)                               #the total usage (user usage + system usage)
+
+echo  Total CPU usage: $total_usage%
+
+if (( $(echo "$total_usage > $threshold" | bc -l) )); then                           #compare total usage with threshold value
+    echo "CPU usage is high (above $threshold%)" > message                           #save the notification to message file
+    mail $current_user < message                                                     #send the notification to the current user from the message file
+    echo "CPU usage is high (above $threshold%)"
+else
+    echo "CPU usage is within acceptable limits"
+fi
+

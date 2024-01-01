@@ -1,0 +1,11 @@
+#Name: Abdulrahman Salman
+#ID: u1220817
+#This script is to display the system information (IP address, MAC address and number of TCP connections)
+
+IP=$(/sbin/ifconfig | grep broadcast | tr -s ' ' | cut -d' ' -f3)        #broadcast is a unique word in the line of IP address
+echo The IP address is: $IP
+mac=$(/sbin/ifconfig | grep ether | tr -s ' ' | cut -d' ' -f3)           #ether is a unique word in the line of MAC address
+echo The MAC address is: $mac
+num_of_tcp=$(netstat -t | grep ESTABLISHED | wc -l)                      #every connection to TCP has the ESTABLISHED state
+echo The number of TCP connections is: $num_of_tcp
+

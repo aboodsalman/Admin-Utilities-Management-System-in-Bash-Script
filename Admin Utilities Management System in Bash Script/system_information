@@ -1,0 +1,8 @@
+#Name: Abdulrahman Salman
+#ID: u1220817
+#This script is to display the system information
+
+echo Hostname: $HOSTNAME
+echo Operating System: $(uname)
+echo Kernal Version: $(uname -r) 
+echo CPU information: $(lscpu)           #we can also use top command

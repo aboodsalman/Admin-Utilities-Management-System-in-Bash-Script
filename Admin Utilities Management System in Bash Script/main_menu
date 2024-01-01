@@ -1,0 +1,27 @@
+#name: Abdulrahman Salman
+#ID: u1220817
+#This script is to display the main menu for the user continuously unil he enter 3 to exit
+
+while true; do
+	echo "===Simple Admin Utilities==="
+	echo "Choose an option from 1 to 3: "
+	echo "1. login as admin"
+	echo "2. View system information"
+	echo "3. Exit"
+	read choice                                  #let user enter his option
+	case $choice in
+	1)
+		login_admin
+		;;
+	2) 
+		system_information
+		;;
+	3) 
+		echo Exiting...
+		exit 
+		;;
+	*)
+		echo "Invalid option"
+		;;
+	esac
+done

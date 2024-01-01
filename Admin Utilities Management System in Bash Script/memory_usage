@@ -1,0 +1,21 @@
+#Name: Abdulrahman Salman
+#ID: u1220817
+#The script below is to find the percent of used memory by using free command and compare it with the threshold value, it will send a notification if the usage is high
+
+current_user=$(whoami)                                                #save the value of the current user name
+threshold=80
+total=$(free | grep Mem: | tr -s ' ' | cut -d' ' -f2)                 #the total memory usage
+used=$(free | grep Mem: | tr -s ' ' | cut -d' ' -f3)                  #the used memory with not human readable format
+used_readable=$(free -h | grep Mem: | tr -s ' ' | cut -d' ' -f3)      #the used memory with human readable format
+percent=$(( (used * 100) / total ))
+echo The used memory is $used_readable
+echo "It's $percent% from the total memory"
+
+if [ "$percent" -gt "$threshold" ]; then                              #compare used memory with threshold value
+    echo "Memory usage is high (above $threshold%)" > message         #save the notification in message file
+    mail $current_user < message                                      #save the notification from message file
+    echo "Memory usage is high (above $threshold%)"
+else
+    echo "Memory usage is within acceptable limits"
+fi
+

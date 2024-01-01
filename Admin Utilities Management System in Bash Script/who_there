@@ -1,0 +1,17 @@
+#Name: Abdulrahman Salman
+#Id: u1220817
+#This script is to display information about currently logged-in users
+
+logged_in_users=$(who | cut -d' ' -f1)                                    #The list of logged-in user names
+
+for user in $logged_in_users; do
+    full_name=$(finger "$user" | grep -m 1 "Name:" | cut -d: -f2)         #view more information about the logged-in users and cut their full name
+
+    user_tasks=$(ps -u "$user")                                           #The processes that the user do
+
+    echo "User: $user"
+    echo "Full Name: $full_name"
+    echo "Current Tasks:"
+    echo "$user_tasks"
+    echo "--------------------------------------------------------------------------------------------------"
+done

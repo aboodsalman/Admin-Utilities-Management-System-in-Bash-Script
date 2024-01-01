@@ -1,0 +1,15 @@
+#Name: Abdulrahman Salman
+#ID: u1220817
+#The script below is to find the percent of used Disk by using df command and compare it with the threshold value, it will send a notification if the usage is high
+
+current_user=$(whoami)     #identify the current user using whoami command
+threshold=80
+disk_usage=$(df -h / | sed -n 2p | tr -s ' ' | cut -d' ' -f5 | tr -d %)        #give the percent of disk usage
+echo The disk usage percentage is: $disk_usage%
+if [ "$disk_usage" -gt "$threshold" ]; then                                    #compare the disk usage with the threshold value
+    echo "Disk usage is high (above $threshold%)" > message                    #save the notifidation in the message file
+    mail $current_user < message                                               #send the notification
+    echo "Disk usage is high (above $threshold%)"
+else
+    echo "Disk usage is within acceptable limits"
+fi
